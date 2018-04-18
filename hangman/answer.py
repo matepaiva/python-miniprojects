@@ -1,11 +1,11 @@
 class Answer(object):
     def __init__(self, referenceWord, maxNumberOfMistakes):
         self.referenceWord = referenceWord
+        self.referenceSet = set(referenceWord)
         self.maxNumberOfMistakes = maxNumberOfMistakes
         self._last = ''
-        self.all = []
+        self.guesses = set()
         self.mistakes = 0
-        self.sucesses = 0
         self.win = False
         self.end = False
 
@@ -17,28 +17,18 @@ class Answer(object):
     def last(self, value):
         if value:
             self._last = value
-            if self._isSingleLetter():
-                self.all += [value]
-                self._setMistakesAndSuccesses()
-            else:
-                self.all = list(value)
-                self.mistakes = self.maxNumberOfMistakes
-                self.win = (value == self.referenceWord)
-                self.end = True
+            self.guesses.update(value)
+            self._validate()
 
     def _isSingleLetter(self):
         return len(self.last) < 2
 
-    def _setMistakesAndSuccesses(self):
-        successes = 0
-        mistakes = 0
-        for letter in self.all:
-            occurrence = self.referenceWord.count(letter)
-            if (occurrence == 0):
-                mistakes += 1
-            else:
-                successes += occurrence
-        self.successes = successes
-        self.mistakes = mistakes
-        self.win = (successes == len(self.referenceWord))
-        self.end = self.win or (mistakes == self.maxNumberOfMistakes)
+    def _validate(self):
+        if (self._isSingleLetter()):
+            self.win = not (self.referenceSet - self.guesses)
+            self.mistakes = len(self.guesses - self.referenceSet)
+            self.end = self.win or (self.mistakes == self.maxNumberOfMistakes)
+        else:
+            self.win = (self.last == self.referenceWord)
+            self.mistakes = self.maxNumberOfMistakes
+            self.end = True

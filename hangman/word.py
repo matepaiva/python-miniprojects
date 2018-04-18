@@ -7,7 +7,7 @@ class Word:
     def getMask(self, answers):
         mask = ''
         for letter in self.name:
-            mask += (letter + ' ') if answers.count(letter) else '_ '
+            mask += (letter + ' ') if letter in answers else '_ '
         return mask
 
     def appendMaskToLabel(self, mask, label):

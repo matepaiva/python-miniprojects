@@ -9,12 +9,12 @@ userAnswer = Answer(randomWord.name, maxNumberOfMistakes)
 
 while not userAnswer.end:
     print(DRAWLIST[userAnswer.mistakes])
-    maskedWord = randomWord.getMask(userAnswer.all)
+    maskedWord = randomWord.getMask(userAnswer.guesses)
     question = randomWord.appendMaskToLabel(maskedWord, LABEL)
     userAnswer.last = input(question)
 
 if userAnswer.win:
-    print(randomWord.getMask(userAnswer.all))
+    print(randomWord.getMask(userAnswer.guesses))
     print(WIN_MESSAGE)
 else:
     print(DRAWLIST[userAnswer.mistakes])
