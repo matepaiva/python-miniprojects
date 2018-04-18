@@ -1,7 +1,8 @@
+from pydash import deburr
 class Answer(object):
     def __init__(self, referenceWord, maxNumberOfMistakes):
-        self.referenceWord = referenceWord
-        self.referenceSet = set(referenceWord)
+        self.referenceWord = deburr(referenceWord)
+        self.referenceSet = set(self.referenceWord)
         self.maxNumberOfMistakes = maxNumberOfMistakes
         self._last = ''
         self.guesses = set()
@@ -16,8 +17,8 @@ class Answer(object):
     @last.setter
     def last(self, value):
         if value:
-            self._last = value
-            self.guesses.update(value)
+            self._last = deburr(value)
+            self.guesses.update(self._last)
             self._validate()
 
     def _isSingleLetter(self):
