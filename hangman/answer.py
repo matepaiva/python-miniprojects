@@ -15,7 +15,7 @@ class Answer(object):
 
     @last.setter
     def last(self, value):
-        if (value):
+        if value:
             self._last = value
             if self._isSingleLetter():
                 self.all += [value]
@@ -23,7 +23,7 @@ class Answer(object):
             else:
                 self.all = list(value)
                 self.mistakes = self.maxNumberOfMistakes
-                self.win = value == self.referenceWord
+                self.win = (value == self.referenceWord)
                 self.end = True
 
     def _isSingleLetter(self):
@@ -40,5 +40,5 @@ class Answer(object):
                 successes += occurrence
         self.successes = successes
         self.mistakes = mistakes
-        self.win = successes == len(self.referenceWord)
+        self.win = (successes == len(self.referenceWord))
         self.end = self.win or (mistakes == self.maxNumberOfMistakes)
