@@ -1,8 +1,9 @@
 from pydash import deburr
+
 class Answer(object):
     def __init__(self, referenceWord, maxNumberOfMistakes):
         self.referenceWord = deburr(referenceWord)
-        self.referenceSet = set(self.referenceWord)
+        self.referenceSet = set(self._removeWhiteSpaces(self.referenceWord))
         self.maxNumberOfMistakes = maxNumberOfMistakes
         self._last = ''
         self.guesses = set()
@@ -18,7 +19,7 @@ class Answer(object):
     def last(self, value):
         if value:
             self._last = self._normalize(value)
-            self.guesses.update(self._last)
+            self.guesses.update(self._removeWhiteSpaces(self._last))
             self._validate()
 
     def _normalize(self, value):
@@ -36,3 +37,6 @@ class Answer(object):
             self.win = (self.last == self.referenceWord)
             self.mistakes = self.maxNumberOfMistakes
             self.end = True
+
+    def _removeWhiteSpaces(self, value):
+        return value.replace(' ', '')
