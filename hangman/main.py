@@ -5,8 +5,23 @@ from answer import Answer
 from constants import DRAWLIST, LABEL, LOSE_MESSAGE, WIN_MESSAGE
 from random import choice
 
+def _filterWordsByLanguageAndLevel(words, language, level):
+    return list(filter(
+        lambda word: (word.language == language) and (word.level == level),
+        words
+    ))
+
+
 def main():
-    randomWord = choice(words)
+    language = input('Chose a language (EN, PT): ')
+    level = input('Chose a difficulty level (beginner, hard): ')
+    filteredWords = _filterWordsByLanguageAndLevel(words, language, level)
+
+    if (len(filteredWords) == 0):
+        print('We didn\'t find words that match your choices. Sorry, come back later.')
+        return
+
+    randomWord = choice(filteredWords)
     maxNumberOfMistakes = len(DRAWLIST) - 1
     userAnswer = Answer(randomWord.name, maxNumberOfMistakes)
 

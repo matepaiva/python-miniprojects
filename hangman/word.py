@@ -1,10 +1,11 @@
 from pydash import deburr
 
 class Word:
-    def __init__(self, name, category, level):
+    def __init__(self, name, category, level, language):
         self.name = name.upper()
         self.category = category
         self.level = level
+        self.language = language
 
     def getMask(self, answers):
         return ' '.join(self._charMask(char, answers) for char in self.name)

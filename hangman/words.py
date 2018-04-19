@@ -3,7 +3,7 @@ from word import Word
 
 # TODO: Add more words
 words = [
-    Word('brazil', 'country', 'beginner'),
-    Word('médico', 'profissão', 'beginner'),
-    Word('Praça de Londres', 'place', 'hard')
+    Word('brazil', 'place', 'beginner', 'EN'),
+    Word('médico', 'profissão', 'beginner', 'PT'),
+    Word('Praça de Londres', 'place', 'hard', 'PT')
 ]
