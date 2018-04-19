@@ -17,9 +17,12 @@ class Answer(object):
     @last.setter
     def last(self, value):
         if value:
-            self._last = deburr(value)
+            self._last = self._normalize(value)
             self.guesses.update(self._last)
             self._validate()
+
+    def _normalize(self, value):
+        return deburr(value.upper())
 
     def _isSingleLetter(self):
         return len(self.last) < 2

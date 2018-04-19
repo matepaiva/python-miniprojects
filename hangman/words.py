@@ -4,5 +4,6 @@ from word import Word
 # TODO: Add more words
 words = [
     Word('brazil', 'country', 'beginner'),
-    Word('médico', 'profissão', 'beginner')
+    Word('médico', 'profissão', 'beginner'),
+    Word('Praça de Londres', 'place', 'hard')
 ]
