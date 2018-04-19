@@ -11,6 +11,7 @@ def main():
     userAnswer = Answer(randomWord.name, maxNumberOfMistakes)
 
     while not userAnswer.end:
+        print('Category: ' + randomWord.category)
         print(DRAWLIST[userAnswer.mistakes])
         maskedWord = randomWord.getMask(userAnswer.guesses)
         question = randomWord.appendMaskToLabel(maskedWord, LABEL)
